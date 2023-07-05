@@ -124,12 +124,8 @@ export async function select() {
             break;
         case 'input':
             const result = await getInput(option.value);
-            if (!result || result === '') {
-                return;
-            }
-
             option.value = result;
-            alt.emit(option.eventName, option.value);
+            alt.emit(option.eventName, result);
             break;
         case 'invoke':
             if (option.rightCallback) {
