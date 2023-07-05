@@ -246,7 +246,7 @@ export function setMenu(_menu: Menu, _onDestroy: Function) {
 
     updatePages();
 
-    alt.emit('crc-instructional-buttons-set', [
+    alt.emit('crc-instructional-buttons', 'set', [
         { text: 'Back / Exit', input: '~INPUT_FRONTEND_RRIGHT~' },
         { text: 'Enter', input: '~INPUT_FRONTEND_RDOWN~' },
         { text: 'Change', input: '~INPUTGROUP_CELLPHONE_NAVIGATE_LR~' },
@@ -256,7 +256,7 @@ export function setMenu(_menu: Menu, _onDestroy: Function) {
 
 export function destroy() {
     playSound('BACK');
-    alt.emit('crc-instructional-buttons-clear');
+    alt.emit('crc-instructional-buttons', 'clear');
 
     onDestroy();
     onDestroy = undefined;
