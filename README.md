@@ -102,18 +102,18 @@ const myMenu = {
     ],
 };
 
+alt.emit('crc-native-menu', { create: myMenu });
+
 alt.on('my-event-onInvoke', (value: any) => {});
 alt.on('my-event-onChange', (value: any) => {});
 alt.on('my-event-onColorChange', (value: number) => {});
 alt.on('my-event-onTextChange', (text: string | undefined) => {});
-
-alt.emit('crc-native-menu', 'create', myMenu);
 ```
 
 ### Destroy Menu
 
 ```ts
-alt.emit('crc-native-menu', 'destroy');
+alt.emit('crc-native-menu', { destroy: true });
 ```
 
 ### Prevent Menu from Exiting

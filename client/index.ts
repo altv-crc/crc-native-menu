@@ -184,7 +184,7 @@ function draw() {
     }
 }
 
-function create(newMenu: Menu) {
+function createMenu(newMenu: Menu) {
     page.setMenu(newMenu, () => {
         alt.clearInterval(interval);
         interval = undefined;
@@ -197,24 +197,25 @@ function create(newMenu: Menu) {
     interval = alt.setInterval(draw, 0);
 }
 
-function destroy() {
+function destroyMenu() {
     page.destroy();
 }
 
-alt.on('crc-native-menu-create', create);
-alt.on('crc-native-menu-destroy', destroy);
-
-alt.on('crc-native-menu', (option: 'create' | 'destroy', menu: Menu) => {
-    if (!option) {
-        throw new Error('Must specify an option when calling "crc-native-menu"');
+function handleActions(functions: { create?: Menu; destroy?: boolean }) {
+    if (typeof functions !== 'object') {
+        return;
     }
 
-    switch (option) {
-        case 'create':
-            create(menu);
-            break;
-        case 'destroy':
-            destroy();
-            break;
+    // This allows for action properties to clearly be defined and pushed to the right functions
+    const { create, destroy } = functions;
+
+    if (create) {
+        createMenu(create);
     }
-});
+
+    if (destroy) {
+        destroyMenu();
+    }
+}
+
+alt.on('crc-native-menu', handleActions);
