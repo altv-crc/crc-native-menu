@@ -203,3 +203,18 @@ function destroy() {
 
 alt.on('crc-native-menu-create', create);
 alt.on('crc-native-menu-destroy', destroy);
+
+alt.on('crc-native-menu', (option: 'create' | 'destroy', menu: Menu) => {
+    if (!option) {
+        throw new Error('Must specify an option when calling "crc-native-menu"');
+    }
+
+    switch (option) {
+        case 'create':
+            create(menu);
+            break;
+        case 'destroy':
+            destroy();
+            break;
+    }
+});
