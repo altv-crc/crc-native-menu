@@ -146,13 +146,24 @@ export async function select() {
 }
 
 export function back() {
-    playSound('BACK');
-
-    if (pageIndex <= 0) {
-        destroy();
-    } else {
-        prevPage();
+    if (menu.backEvent) {
+        playSound('BACK');
+        alt.emit(menu.backEvent);
+        return;
     }
+
+    if (pageIndex >= 1) {
+        playSound('BACK');
+        prevPage();
+        return;
+    }
+
+    if (menu.noExit) {
+        return;
+    }
+
+    playSound('BACK');
+    destroy();
 }
 
 export function left() {
@@ -235,15 +246,11 @@ export function setMenu(_menu: Menu, _onDestroy: Function) {
     updatePages();
 
     alt.emit('crc-instructional-buttons-set', [
-        { text: 'Exit', input: '~INPUT_FRONTEND_RRIGHT~' },
+        { text: 'Back / Exit', input: '~INPUT_FRONTEND_RRIGHT~' },
         { text: 'Enter', input: '~INPUT_FRONTEND_RDOWN~' },
         { text: 'Change', input: '~INPUTGROUP_CELLPHONE_NAVIGATE_LR~' },
         { text: 'Navigate', input: '~INPUTGROUP_CELLPHONE_NAVIGATE_UD~' },
     ]);
-
-    return {
-        destroy() {},
-    };
 }
 
 export function destroy() {

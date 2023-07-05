@@ -38,6 +38,20 @@ export interface ColorGroup {
 export interface Menu {
     header: string;
     options: Array<TextInput | Invoke | Selection | Color>;
-    background?: ColorGroup;
-    text?: ColorGroup;
+
+    /**
+     * An event to call when 'backspace' is pressed.
+     *
+     * @type {string}
+     * @memberof Menu
+     */
+    backEvent?: string;
+
+    /**
+     * If this is set to true, it will prevent the user from fully exiting the menu.
+     *
+     * @type {boolean}
+     * @memberof Menu
+     */
+    noExit?: boolean;
 }

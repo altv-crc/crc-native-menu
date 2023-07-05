@@ -116,6 +116,31 @@ alt.emit('crc-native-menu-create', myMenu);
 alt.emit('crc-native-menu-destroy');
 ```
 
+### Prevent Menu from Exiting
+
+If you want a menu to stop from exiting entirely, you can use the `noExit` flag.
+
+```ts
+const myMenu = {
+    header: 'My Menu',
+    noExit: true,
+    options: []
+}
+```
+
+### Call Event on Backspace
+
+If you want the menu to call an event when `backspace` is pressed. You can use the `backEvent` property.
+
+```ts
+const myMenu = {
+    header: 'My Menu',
+    backEvent: 'some-some-previous-menu-tree',
+    options: []
+}
+```
+
+
 # Preview
 
 ![](https://i.imgur.com/EQ30tXS.png)
