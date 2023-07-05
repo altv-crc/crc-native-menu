@@ -138,7 +138,7 @@ export async function select() {
                 break;
             }
 
-            alt.emit(option.eventName);
+            alt.emit(option.eventName, option.value);
             break;
     }
 
