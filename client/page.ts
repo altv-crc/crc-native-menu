@@ -148,6 +148,7 @@ export async function select() {
 export function back() {
     if (menu.backEvent) {
         playSound('BACK');
+        console.log('event call: ' + menu.backEvent);
         alt.emit(menu.backEvent);
         return;
     }

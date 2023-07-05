@@ -12,6 +12,8 @@ let anchorX = 0.985 - headerWidth / 2; // Right
 let anchorY = 0.06; // Top
 let boxHeight = 0.07;
 let boxWidth = 0.22;
+let controlCooldown = Date.now();
+let controlDebounce = 150;
 
 const CONTROLS = {
     DOWN: 187,
@@ -23,32 +25,42 @@ const CONTROLS = {
 };
 
 function handleControls() {
-    if (native.isControlJustPressed(0, CONTROLS.UP)) {
+    if (Date.now() < controlCooldown) {
+        return;
+    }
+
+    if (native.isControlPressed(0, CONTROLS.UP)) {
+        controlCooldown = Date.now() + controlDebounce;
         page.up();
         return;
     }
 
-    if (native.isControlJustPressed(0, CONTROLS.DOWN)) {
+    if (native.isControlPressed(0, CONTROLS.DOWN)) {
+        controlCooldown = Date.now() + controlDebounce;
         page.down();
         return;
     }
 
-    if (native.isControlJustPressed(0, CONTROLS.LEFT)) {
+    if (native.isControlPressed(0, CONTROLS.LEFT)) {
+        controlCooldown = Date.now() + controlDebounce;
         page.left();
         return;
     }
 
-    if (native.isControlJustPressed(0, CONTROLS.RIGHT)) {
+    if (native.isControlPressed(0, CONTROLS.RIGHT)) {
+        controlCooldown = Date.now() + controlDebounce;
         page.right();
         return;
     }
 
     if (native.isControlJustPressed(0, CONTROLS.ACCEPT)) {
+        controlCooldown = Date.now() + controlDebounce;
         page.select();
         return;
     }
 
     if (native.isControlJustPressed(0, CONTROLS.BACK)) {
+        controlCooldown = Date.now() + controlDebounce;
         page.back();
         return;
     }
