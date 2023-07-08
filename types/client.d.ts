@@ -1,18 +1,5 @@
 import { Menu } from '../client/interfaces';
 
-type RecursivePartial<T> = {
-    [P in keyof T]?: T[P] extends (infer U)[]
-        ? RecursivePartial<U>[]
-        : T[P] extends object | undefined
-        ? RecursivePartial<T[P]>
-        : T[P];
-};
-
-/**
- * We have to mark everything as optional for intellisense some strange reason. :Sadge:
- *
- * @interface Options
- */
 interface Options {
     /**
      * Set the menu you want to show
@@ -20,7 +7,7 @@ interface Options {
      * @type {Menu}
      * @memberof Options
      */
-    create?: RecursivePartial<Menu>;
+    create?: Menu;
 
     /**
      * Remove the currently shown menu
@@ -32,5 +19,7 @@ interface Options {
 }
 
 declare module 'alt-client' {
-    export function emit(eventName: 'crc-native-menu', data: Partial<Options>);
+    interface ICustomEmitEvent {
+        'crc-native-menu': (data: Partial<Options>) => void;
+    }
 }
