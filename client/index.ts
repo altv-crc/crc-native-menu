@@ -13,7 +13,7 @@ let anchorY = 0.06; // Top
 let boxHeight = 0.07;
 let boxWidth = 0.22;
 let controlCooldown = Date.now();
-let controlDebounce = 150;
+let controlDebounce = 145;
 
 const CONTROLS = {
     DOWN: 187,

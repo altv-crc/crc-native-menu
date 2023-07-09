@@ -182,10 +182,11 @@ export function left() {
     }
 
     if (option.index - 1 < 0) {
-        return;
+        option.index = option.options.length - 1;
+    } else {
+        option.index -= 1;
     }
 
-    option.index -= 1;
     if (option.eventName) {
         alt.emit(option.eventName, option.options[option.index].value);
     }
@@ -208,10 +209,11 @@ export function right() {
     }
 
     if (option.index + 1 >= option.options.length) {
-        return;
+        option.index = 0;
+    } else {
+        option.index += 1;
     }
 
-    option.index += 1;
     if (option.eventName) {
         alt.emit(option.eventName, option.options[option.index].value);
     }
