@@ -148,14 +148,7 @@ export async function select() {
 export function back() {
     if (menu.backEvent) {
         playSound('BACK');
-        console.log('event call: ' + menu.backEvent);
         alt.emit(menu.backEvent);
-        return;
-    }
-
-    if (pageIndex >= 1) {
-        playSound('BACK');
-        prevPage();
         return;
     }
 
@@ -262,8 +255,10 @@ export function destroy() {
     playSound('BACK');
     alt.emit('crc-instructional-buttons', { clear: true });
 
-    onDestroy();
-    onDestroy = undefined;
+    if (onDestroy) {
+        onDestroy();
+        onDestroy = undefined;
+    }
 
     menu = undefined;
     optionIndex = 0;
