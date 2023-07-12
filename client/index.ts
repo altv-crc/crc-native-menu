@@ -29,37 +29,37 @@ function handleControls() {
         return;
     }
 
-    if (native.isControlPressed(0, CONTROLS.UP)) {
+    if (native.isControlPressed(0, CONTROLS.UP) || native.isDisabledControlPressed(0, CONTROLS.UP)) {
         controlCooldown = Date.now() + controlDebounce;
         page.up();
         return;
     }
 
-    if (native.isControlPressed(0, CONTROLS.DOWN)) {
+    if (native.isControlPressed(0, CONTROLS.DOWN) || native.isDisabledControlPressed(0, CONTROLS.DOWN)) {
         controlCooldown = Date.now() + controlDebounce;
         page.down();
         return;
     }
 
-    if (native.isControlPressed(0, CONTROLS.LEFT)) {
+    if (native.isControlPressed(0, CONTROLS.LEFT) || native.isDisabledControlPressed(0, CONTROLS.LEFT)) {
         controlCooldown = Date.now() + controlDebounce;
         page.left();
         return;
     }
 
-    if (native.isControlPressed(0, CONTROLS.RIGHT)) {
+    if (native.isControlPressed(0, CONTROLS.RIGHT) || native.isDisabledControlPressed(0, CONTROLS.RIGHT)) {
         controlCooldown = Date.now() + controlDebounce;
         page.right();
         return;
     }
 
-    if (native.isControlJustPressed(0, CONTROLS.ACCEPT)) {
+    if (native.isControlJustPressed(0, CONTROLS.ACCEPT) || native.isDisabledControlJustPressed(0, CONTROLS.ACCEPT)) {
         controlCooldown = Date.now() + controlDebounce;
         page.select();
         return;
     }
 
-    if (native.isControlJustPressed(0, CONTROLS.BACK)) {
+    if (native.isControlJustPressed(0, CONTROLS.BACK) || native.isDisabledControlJustPressed(0, CONTROLS.BACK)) {
         controlCooldown = Date.now() + controlDebounce;
         page.back();
         return;
