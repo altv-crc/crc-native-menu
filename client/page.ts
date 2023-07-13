@@ -8,7 +8,7 @@ let onDestroy: Function;
 
 // Page Navigation
 let pageLimit = 8;
-let pageCount: number;
+let maxPageIndex: number;
 let pageIndex = 0;
 
 // Up & Down Navigation
@@ -40,25 +40,17 @@ function playSound(type: 'NAVIGATE' | 'ENTER' | 'BACK' | 'NAV_UP_DOWN' | 'OPEN')
 }
 
 function updatePages() {
-    const min = pageIndex * (pageLimit - 1);
-    const max = min + (pageLimit - 1);
+    const hasNextPage = pageIndex < maxPageIndex - 1;
+    const hasPrevPage = pageIndex >= 1;
+
+    const min = pageIndex * pageLimit;
+    const max = min + pageLimit;
+
     const newOptions = menu.options.slice(min, max);
-
-    let hasNextPage = pageIndex !== pageCount && pageCount >= 2;
-    let hasPrevPage = pageIndex >= 1;
-    let text;
-
-    if (hasNextPage && hasPrevPage) {
-        text = `< Page >`;
-    } else if (hasNextPage && !hasPrevPage) {
-        text = 'Page >';
-    } else {
-        text = '< Page';
-    }
 
     if (hasNextPage || hasPrevPage) {
         newOptions.unshift({
-            text,
+            text: 'Pages',
             type: 'invoke',
             value: undefined,
             isPageChanger: true,
@@ -73,7 +65,7 @@ function updatePages() {
 }
 
 function nextPage() {
-    if (pageIndex + 1 > pageCount) {
+    if (pageIndex + 1 > maxPageIndex) {
         return;
     }
 
@@ -227,7 +219,7 @@ export function getMenu(): Menu {
 }
 
 export function getPageCount() {
-    return pageCount;
+    return maxPageIndex - 1;
 }
 
 export function getPageIndex() {
@@ -237,7 +229,10 @@ export function getPageIndex() {
 export function setMenu(_menu: Menu, _onDestroy: Function) {
     menu = _menu;
     onDestroy = _onDestroy;
-    pageCount = Math.ceil(menu.options.length / pageLimit);
+    maxPageIndex = Math.ceil(menu.options.length / pageLimit);
+    if (maxPageIndex < 0) {
+        maxPageIndex = 0;
+    }
 
     updatePages();
 
@@ -262,7 +257,7 @@ export function destroy() {
 
     menu = undefined;
     optionIndex = 0;
-    pageCount = 0;
+    maxPageIndex = 0;
     pageIndex = 0;
     currentOptions = [];
 }
