@@ -92,6 +92,7 @@ export function down() {
     }
 
     option = currentOptions[optionIndex];
+    alt.emit('crc-native-menu-option-changed', option);
     playSound('NAVIGATE');
 }
 
@@ -103,6 +104,7 @@ export function up() {
     }
 
     option = currentOptions[optionIndex];
+    alt.emit('crc-native-menu-option-changed', option);
     playSound('NAVIGATE');
 }
 

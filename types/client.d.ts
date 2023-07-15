@@ -1,4 +1,4 @@
-import { Menu } from '../client/interfaces';
+import * as I from '../client/interfaces';
 
 interface Options {
     /**
@@ -7,7 +7,7 @@ interface Options {
      * @type {Menu}
      * @memberof Options
      */
-    create?: Menu;
+    create?: I.Menu;
 
     /**
      * Remove the currently shown menu
@@ -21,5 +21,12 @@ interface Options {
 declare module 'alt-client' {
     interface ICustomEmitEvent {
         'crc-native-menu': (data: Partial<Options>) => void;
+
+        /**
+         * Invoked when the up and down navigation is changed
+         *
+         * @memberof ICustomEmitEvent
+         */
+        'crc-native-menu-option-changed': (option: I.Option) => void;
     }
 }
