@@ -1,7 +1,28 @@
 import * as alt from 'alt-client';
 
 export interface Option {
+    /**
+     * Text to display on this menu entry.
+     *
+     * @type {string}
+     * @memberof Option
+     */
     text: string;
+
+    /**
+     * An identifier associated with this menu entry
+     *
+     * @type {string}
+     * @memberof Option
+     */
+    id?: string;
+
+    /**
+     * An event name to call when invoking this menu entry.
+     *
+     * @type {string}
+     * @memberof Option
+     */
     eventName?: string;
 }
 
